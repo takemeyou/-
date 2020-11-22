@@ -6,8 +6,6 @@ public class solveDemo {
 	
 	int[] best;
 	
-	
-	
 	public abstract class node{
 		int position;
 		boolean group;
