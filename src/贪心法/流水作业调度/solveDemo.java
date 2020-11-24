@@ -1,6 +1,5 @@
 package 贪心法.流水作业调度;
 
-import 动态规划.习题.d.biscuit;
 
 public class solveDemo {
 	
@@ -38,9 +37,7 @@ public class solveDemo {
 			f1 += a[best[i]];
 			f2 = max(f2,f1)+b[best[i]];
 		}
-		
 		return f2;
-		
 		
 	}
 	

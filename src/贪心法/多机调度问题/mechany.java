@@ -1,89 +1,45 @@
 package 贪心法.多机调度问题;
 
-import java.util.Comparator;
-import java.util.stream.BaseStream;
-
-
 public class mechany {
 	
-	public abstract class Node implements Comparator<Integer>{
-		int id;
-		boolean group;
-		int time;
-		
-		public int compare(int o1, int o2) {
-			return 01<02?o2:o1;
-		}	
-	}
-	
-	
-	public int solve(int[] a,int[] b,int[] best,int n) {
-		int i,j,k = 0;
-		Node[] cNodes = new Node[50];
-		for(i=0;i<n;i++) {
-			cNodes[i].id = i;
-			cNodes[i].group = (a[i]<=b[i]);
-			cNodes[i].time = a[i]<=b[i]?a[i]:b[i];
+	public static int greedy(int[] a,int m) {
+		int n = a.length-1;
+		int sum = 0;
+		if(n<=m) {
+			for(int i=0;i<n;i++)
+				sum+=a[i];
+			System.out.println("为每个作业分配一台机器");
+			return sum;
 		}
+		JobNode[] d = new JobNode[n];
+		for(int i=0;i<n;i++)
+			d[i] = new JobNode(i+1, a[i+1]);
+		sort(d);
+		MinHeap H = new MinHeap(m);
+		for(int i=1;i<=m;i++) {
+			MachineNode md = new MachineNode(i, 0);
+			H.put(md);
+ 		}
 		
-		sort();//按time递增排序
-		j=0;
-		k=n-1;
-		for(i=0;i<n;i++) {
-			if(cNodes[i].group == true) {
-				best[j++] = cNodes[i].id;
-				
-			}else {
-				best[k--] = cNodes[i].id;
-			}
+		for(int i=n;i>=1;i--) {
+			MachineNode x = H.removeMin();
+			System.out.println("将机器"+x.id+"从"+x.availe+"到"+(x.availe+d[i-1].time)+"的时间段分配给作业"+d[i-1].id);
+			x.availe += d[i-1].time;
+			sum = x.availe;
+			H.put(x);
 		}
+		return sum;
 		
-		
-		int f1 = 0;
-		int f2 = 0;
-		for(i=0;i<n;i++) {
-			f1+=a[best[i]];
-			f2 = max(f2,f1) + b[best[i]];
-		}
-		
-		return f2;
-		
+	}
+
+
+	private static void sort(JobNode[] d) {
 		
 		
 	}
 	
-	
-	private int max(int f2, int f1) {
-		
-		return f2>f1?f2:f1;
-	}
-
-
-	private void sort() {
-		
-		
-	}
-
-
-
 	public static void main(String[] args) {
 		
-		
-		
-		mechany sd = new mechany();
-		int n=4;
-		int[] best=new int[] {0};
-		int[] a= new int[] {5,12,4,8};
-		int[] b = new int[] {6,2,14,7};
-		
-		sd.solve(a, b, best, n);
-		
-		
- 		
-		
-		
 	}
-	
-	
 
 }
