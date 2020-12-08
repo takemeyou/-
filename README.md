@@ -1,3 +1,3 @@
 # Aarithmetic
 
-代码http://github
+代码https://github.com/takemeyou/Aarithmetic/edit/master/README.md
